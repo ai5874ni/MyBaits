@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.more.dao.IUser">
+    <resultMap id="resultUser" type="com.smart.more.model.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="mobile" column="mobile"/>
+        <collection property="groups" column="id" select="com.smart.more.dao.IUserGroup.getGroupsByUserId"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="int" resultMap="resultUser">
+        select * from user_more where id=#{userId}
+    </select>
+
+</mapper>
